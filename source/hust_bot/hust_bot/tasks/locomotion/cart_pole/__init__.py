@@ -13,7 +13,7 @@ from . import agents
 
 
 gym.register(
-    id="Template-Hust-Bot-Direct-v0",
+    id="hustbot-cartPole-v0",
     entry_point=f"{__name__}.hust_bot_env:HustBotEnv",
     disable_env_checker=True,
     kwargs={
