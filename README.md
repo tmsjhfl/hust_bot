@@ -1,65 +1,42 @@
-# Template for Isaac Lab Projects
-
-## Overview
-
-This project/repository serves as a template for building projects or extensions based on Isaac Lab.
-It allows you to develop in an isolated environment, outside of the core Isaac Lab repository.
-
-**Key Features:**
-
-- `Isolation` Work outside the core Isaac Lab repository, ensuring that your development efforts remain self-contained.
-- `Flexibility` This template is set up to allow your code to be run as an extension in Omniverse.
-
-**Keywords:** extension, template, isaaclab
+# Isaac lab for hust robot 
 
 ## Installation
-
-- Install Isaac Lab by following the [installation guide](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/index.html).
-  We recommend using the conda installation as it simplifies calling Python scripts from the terminal.
-
-- Clone or copy this project/repository separately from the Isaac Lab installation (i.e. outside the `IsaacLab` directory):
-
-- Using a python interpreter that has Isaac Lab installed, install the library in editable mode using:
-
+- Install Isaac Sim and Isaac Lab by following the [installation guide](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/index.html)  
+    Note that using the conda installation will simplify calling python scripts from the terminal  
+      
+- Create your own conda env  
     ```bash
-    # use 'PATH_TO_isaaclab.sh|bat -p' instead of 'python' if Isaac Lab is not installed in Python venv or conda
-    python -m pip install -e source/hust_bot
+    conda create -n lab_bot python=3.10  
+    conda activate lab_bot  
+      
+- Using a python interpreter, install the library in editable mode using:  
+    ```bash  
+    cd hust_bot/hust_bot  
+    python -m pip install -e source/hust_bot  
+    ```  
+  
+- Listing the avaiable tasks in this project  
+    ```bash  
+    python scripts/list_envs.py  
+    # output  
+    +--------+---------------------+----------------------------------------------+----------------------------------------------------------+  
+    | S. No. | Task Name           | Entry Point                                  |  Config                                                  |                  
+    +--------+---------------------+----------------------------------------------+----------------------------------------------------------+  
+    |   1    | hustbot-G1-Walk-v0  | hust_bot.tasks.amp.g1_amp.g1_amp_env:G1AmpEnv| hust_bot.tasks.amp.g1_amp.g1_amp_env_cfg:G1AmpWalkEnvCfg |
+    +--------+---------------------+----------------------------------------------+----------------------------------------------------------+  
+    ```  
+- Running a task  
+    ```bash  
+    python scripts/skrl/train.py --task hustbot-G1-Walk-v0 --num_envs 4096  
+    # args: --device cuda:x, --headless and so on
+    ```  
+- Play a task
+    ```bash  
+    python scripts/skrl/play.py --task hustbot-G1-Walk-v0 --num_envs 3  
+    ```  
+## Motion Retarget
 
-- Verify that the extension is correctly installed by:
-
-    - Listing the available tasks:
-
-        Note: It the task name changes, it may be necessary to update the search pattern `"Template-"`
-        (in the `scripts/list_envs.py` file) so that it can be listed.
-
-        ```bash
-        # use 'FULL_PATH_TO_isaaclab.sh|bat -p' instead of 'python' if Isaac Lab is not installed in Python venv or conda
-        python scripts/list_envs.py
-        ```
-
-    - Running a task:
-
-        ```bash
-        # use 'FULL_PATH_TO_isaaclab.sh|bat -p' instead of 'python' if Isaac Lab is not installed in Python venv or conda
-        python scripts/<RL_LIBRARY>/train.py --task=<TASK_NAME>
-        ```
-
-    - Running a task with dummy agents:
-
-        These include dummy agents that output zero or random agents. They are useful to ensure that the environments are configured correctly.
-
-        - Zero-action agent
-
-            ```bash
-            # use 'FULL_PATH_TO_isaaclab.sh|bat -p' instead of 'python' if Isaac Lab is not installed in Python venv or conda
-            python scripts/zero_agent.py --task=<TASK_NAME>
-            ```
-        - Random-action agent
-
-            ```bash
-            # use 'FULL_PATH_TO_isaaclab.sh|bat -p' instead of 'python' if Isaac Lab is not installed in Python venv or conda
-            python scripts/random_agent.py --task=<TASK_NAME>
-            ```
+- Coming soon
 
 ### Set up IDE (Optional)
 
